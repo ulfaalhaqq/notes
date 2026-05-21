@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notes App — Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+        .clip {
+      width: 200px;
+      height: 70px;
+      background: #4a6a3a;
+      border-radius: 20px;
+      position: absolute;
+      top: -19px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 10;
+    }
+    .clip::before {
+      content: '';
+      width: 180px;
+      height: 60px;
+      background: #3a5a2a;
+      border-radius: 20px;
+    }
+    .clip::after {
+      content: '';
+      width: 175px;
+      height: 55px;
+      background: #5a7a4a;
+      border-radius: 20px;
+      position: absolute;
+    }
+    .corner-fold {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, transparent 50%, #d4cba8 50%);
+      border-top-left-radius: 4px;
+    }
+    .note-line {
+      height: 1.5px;
+      background: #e0d8c0;
+      border-radius: 2px;
+      margin-bottom: 12px;
+    }
+    .floating-note {
+      position: absolute;
+      pointer-events: none;
+    }
+    @keyframes float1 {
+      0%, 100% { transform: rotate(-15deg) translateY(0px); }
+      50% { transform: rotate(-15deg) translateY(-15px); }
+    }
+    @keyframes float2 {
+      0%, 100% { transform: rotate(12deg) translateY(0px); }
+      50% { transform: rotate(12deg) translateY(-20px); }
+    }
+    @keyframes float3 {
+      0%, 100% { transform: rotate(10deg) translateY(0px); }
+      50% { transform: rotate(10deg) translateY(-12px); }
+    }
+    @keyframes float4 {
+      0%, 100% { transform: rotate(-10deg) translateY(0px); }
+      50% { transform: rotate(-10deg) translateY(-18px); }
+    }
+    @keyframes float5 {
+      0%, 100% { transform: rotate(5deg) translateY(0px); }
+      50% { transform: rotate(5deg) translateY(-10px); }
+    }
+    @keyframes float6 {
+      0%, 100% { transform: rotate(-8deg) translateY(0px); }
+      50% { transform: rotate(-8deg) translateY(-14px); }
+    }
+    @keyframes float7 {
+      0%, 100% { transform: rotate(20deg) translateY(0px); }
+      50% { transform: rotate(20deg) translateY(-16px); }
+    }
+    @keyframes float8 {
+      0%, 100% { transform: rotate(-20deg) translateY(0px); }
+      50% { transform: rotate(-20deg) translateY(-10px); }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center overflow-hidden"
+  style="background:linear-gradient(135deg,#c8dfc8 0%,#a8c8a8 50%,#88aa88 100%);font-family:'Plus Jakarta Sans',sans-serif;">
+
+  <!-- Background floating notes -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden">
+
+  <!-- Kiri atas -->
+  <div class="floating-note" style="left:-30px;top:80px;opacity:0.8;animation:float1 3s ease-in-out infinite">
+    <div style="width:100px;height:115px;background:#5a7a4a;border:3px solid #4a6a3a;border-radius:14px;display:flex;flex-direction:column;align-items:center;padding-top:8px;box-shadow:0 8px 20px rgba(0,0,0,0.2)">
+      <div style="width:36px;height:14px;background:#4a6a3a;border-radius:10px;margin-top:-14px"></div>
+      <div style="flex:1;width:calc(100% - 12px);margin:6px 0 6px;background:#f5f0e0;border-radius:8px;padding:8px 6px;position:relative;overflow:hidden">
+        <div style="height:1.5px;background:#e0d8c0;margin-bottom:8px;border-radius:2px"></div>
+        <div style="height:1.5px;background:#e0d8c0;margin-bottom:8px;border-radius:2px"></div>
+        <div style="height:1.5px;background:#e0d8c0;margin-bottom:8px;border-radius:2px"></div>
+        <div style="position:absolute;bottom:0;right:0;width:14px;height:14px;background:linear-gradient(135deg,transparent 50%,#d4cba8 50%)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kanan atas -->
+  <div class="floating-note" style="right:-20px;top:60px;opacity:0.8;animation:float2 4s ease-in-out infinite">
+    <div style="width:90px;height:105px;background:#7a9a6a;border:3px solid #5a7a4a;border-radius:14px;display:flex;flex-direction:column;align-items:center;padding-top:8px;box-shadow:0 8px 20px rgba(0,0,0,0.2)">
+      <div style="width:32px;height:13px;background:#5a7a4a;border-radius:10px;margin-top:-13px"></div>
+      <div style="flex:1;width:calc(100% - 10px);margin:6px 0 6px;background:#f5f0e0;border-radius:8px;padding:6px;position:relative;overflow:hidden">
+        <div style="height:1.5px;background:#e0d8c0;margin-bottom:7px;border-radius:2px"></div>
+        <div style="height:1.5px;background:#e0d8c0;margin-bottom:7px;border-radius:2px"></div>
+        <div style="height:1.5px;background:#e0d8c0;border-radius:2px"></div>
+        <div style="position:absolute;bottom:0;right:0;width:12px;height:12px;background:linear-gradient(135deg,transparent 50%,#d4cba8 50%)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kiri bawah -->
+  <div class="floating-note" style="left:-20px;bottom:80px;opacity:0.7;animation:float3 3.5s ease-in-out infinite">
+    <div style="width:85px;height:100px;background:#6a8a5a;border:3px solid #4a6a3a;border-radius:14px;display:flex;flex-direction:column;align-items:center;padding-top:8px;box-shadow:0 8px 20px rgba(0,0,0,0.2)">
+      <div style="width:30px;height:12px;background:#4a6a3a;border-radius:10px;margin-top:-12px"></div>
+      <div style="flex:1;width:calc(100% - 10px);margin:6px 0 6px;background:#f5f0e0;border-radius:8px;padding:6px;position:relative;overflow:hidden">
+        <div style="height:1.5px;background:#e0d8c0;margin-bottom:7px;border-radius:2px"></div>
+        <div style="height:1.5px;background:#e0d8c0;margin-bottom:7px;border-radius:2px"></div>
+        <div style="height:1.5px;background:#e0d8c0;border-radius:2px"></div>
+        <div style="position:absolute;bottom:0;right:0;width:12px;height:12px;background:linear-gradient(135deg,transparent 50%,#d4cba8 50%)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kanan bawah -->
+  <div class="floating-note" style="right:-25px;bottom:60px;opacity:0.7;animation:float4 4.5s ease-in-out infinite">
+    <div style="width:100px;height:115px;background:#5a7a4a;border:3px solid #3a5a2a;border-radius:14px;display:flex;flex-direction:column;align-items:center;padding-top:8px;box-shadow:0 8px 20px rgba(0,0,0,0.2)">
+      <div style="width:36px;height:14px;background:#3a5a2a;border-radius:10px;margin-top:-14px"></div>
+      <div style="flex:1;width:calc(100% - 12px);margin:6px 0 6px;background:#f5f0e0;border-radius:8px;padding:8px 6px;position:relative;overflow:hidden">
+        <div style="height:1.5px;background:#e0d8c0;margin-bottom:8px;border-radius:2px"></div>
+        <div style="height:1.5px;background:#e0d8c0;margin-bottom:8px;border-radius:2px"></div>
+        <div style="height:1.5px;background:#e0d8c0;border-radius:2px"></div>
+        <div style="position:absolute;bottom:0;right:0;width:14px;height:14px;background:linear-gradient(135deg,transparent 50%,#d4cba8 50%)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tengah kiri -->
+  <div class="floating-note" style="left:5%;top:45%;opacity:0.6;animation:float5 5s ease-in-out infinite">
+    <div style="width:75px;height:88px;background:#8aaa7a;border:3px solid #6a8a5a;border-radius:14px;display:flex;flex-direction:column;align-items:center;padding-top:8px;box-shadow:0 8px 20px rgba(0,0,0,0.2)">
+      <div style="width:28px;height:11px;background:#6a8a5a;border-radius:10px;margin-top:-11px"></div>
+      <div style="flex:1;width:calc(100% - 10px);margin:5px 0 5px;background:#f5f0e0;border-radius:8px;padding:5px;position:relative;overflow:hidden">
+        <div style="height:1.5px;background:#e0d8c0;margin-bottom:6px;border-radius:2px"></div>
+        <div style="height:1.5px;background:#e0d8c0;border-radius:2px"></div>
+        <div style="position:absolute;bottom:0;right:0;width:10px;height:10px;background:linear-gradient(135deg,transparent 50%,#d4cba8 50%)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tengah kanan -->
+  <div class="floating-note" style="right:4%;top:40%;opacity:0.6;animation:float6 4.2s ease-in-out infinite">
+    <div style="width:80px;height:92px;background:#4a6a3a;border:3px solid #3a5a2a;border-radius:14px;display:flex;flex-direction:column;align-items:center;padding-top:8px;box-shadow:0 8px 20px rgba(0,0,0,0.2)">
+      <div style="width:28px;height:11px;background:#3a5a2a;border-radius:10px;margin-top:-11px"></div>
+      <div style="flex:1;width:calc(100% - 10px);margin:5px 0 5px;background:#f5f0e0;border-radius:8px;padding:5px;position:relative;overflow:hidden">
+        <div style="height:1.5px;background:#e0d8c0;margin-bottom:6px;border-radius:2px"></div>
+        <div style="height:1.5px;background:#e0d8c0;border-radius:2px"></div>
+        <div style="position:absolute;bottom:0;right:0;width:10px;height:10px;background:linear-gradient(135deg,transparent 50%,#d4cba8 50%)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Atas tengah kiri -->
+  <div class="floating-note" style="left:18%;top:5%;opacity:0.5;animation:float7 3.8s ease-in-out infinite">
+    <div style="width:70px;height:82px;background:#7a9a6a;border:3px solid #5a7a4a;border-radius:14px;display:flex;flex-direction:column;align-items:center;padding-top:8px;box-shadow:0 8px 20px rgba(0,0,0,0.2)">
+      <div style="width:25px;height:10px;background:#5a7a4a;border-radius:10px;margin-top:-10px"></div>
+      <div style="flex:1;width:calc(100% - 10px);margin:5px 0 5px;background:#f5f0e0;border-radius:8px;padding:5px;position:relative;overflow:hidden">
+        <div style="height:1.5px;background:#e0d8c0;margin-bottom:6px;border-radius:2px"></div>
+        <div style="height:1.5px;background:#e0d8c0;border-radius:2px"></div>
+        <div style="position:absolute;bottom:0;right:0;width:10px;height:10px;background:linear-gradient(135deg,transparent 50%,#d4cba8 50%)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bawah tengah kanan -->
+  <div class="floating-note" style="right:18%;bottom:5%;opacity:0.5;animation:float8 4.8s ease-in-out infinite">
+    <div style="width:70px;height:82px;background:#6a8a5a;border:3px solid #4a6a3a;border-radius:14px;display:flex;flex-direction:column;align-items:center;padding-top:8px;box-shadow:0 8px 20px rgba(0,0,0,0.2)">
+      <div style="width:25px;height:10px;background:#4a6a3a;border-radius:10px;margin-top:-10px"></div>
+      <div style="flex:1;width:calc(100% - 10px);margin:5px 0 5px;background:#f5f0e0;border-radius:8px;padding:5px;position:relative;overflow:hidden">
+        <div style="height:1.5px;background:#e0d8c0;margin-bottom:6px;border-radius:2px"></div>
+        <div style="height:1.5px;background:#e0d8c0;border-radius:2px"></div>
+        <div style="position:absolute;bottom:0;right:0;width:10px;height:10px;background:linear-gradient(135deg,transparent 50%,#d4cba8 50%)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bawah tengah kiri -->
+  <div class="floating-note" style="left:18%;bottom:5%;opacity:0.5;animation:float8 4.8s ease-in-out infinite">
+    <div style="width:70px;height:82px;background:#6a8a5a;border:3px solid #4a6a3a;border-radius:14px;display:flex;flex-direction:column;align-items:center;padding-top:8px;box-shadow:0 8px 20px rgba(0,0,0,0.2)">
+      <div style="width:25px;height:10px;background:#4a6a3a;border-radius:10px;margin-top:-10px"></div>
+      <div style="flex:1;width:calc(100% - 10px);margin:5px 0 5px;background:#f5f0e0;border-radius:8px;padding:5px;position:relative;overflow:hidden">
+        <div style="height:1.5px;background:#e0d8c0;margin-bottom:6px;border-radius:2px"></div>
+        <div style="height:1.5px;background:#e0d8c0;border-radius:2px"></div>
+        <div style="position:absolute;bottom:0;right:0;width:10px;height:10px;background:linear-gradient(135deg,transparent 50%,#d4cba8 50%)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Atas tengah atas -->
+  <div class="floating-note" style="right:18%;top:5%;opacity:0.5;animation:float8 4.8s ease-in-out infinite">
+    <div style="width:70px;height:82px;background:#6a8a5a;border:3px solid #4a6a3a;border-radius:14px;display:flex;flex-direction:column;align-items:center;padding-top:8px;box-shadow:0 8px 20px rgba(0,0,0,0.2)">
+      <div style="width:25px;height:10px;background:#4a6a3a;border-radius:10px;margin-top:-10px"></div>
+      <div style="flex:1;width:calc(100% - 10px);margin:5px 0 5px;background:#f5f0e0;border-radius:8px;padding:5px;position:relative;overflow:hidden">
+        <div style="height:1.5px;background:#e0d8c0;margin-bottom:6px;border-radius:2px"></div>
+        <div style="height:1.5px;background:#e0d8c0;border-radius:2px"></div>
+        <div style="position:absolute;bottom:0;right:0;width:10px;height:10px;background:linear-gradient(135deg,transparent 50%,#d4cba8 50%)"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  <!-- LOGIN CARD — Berbentuk Notes/Clipboard -->
+  <div class="relative z-10" style="margin-top:20px">
+
+    <!-- Clipboard outer frame -->
+    <div class="relative" style="width:420px;">
+
+      <!-- Klip atas -->
+      <div class="clip"></div>
+
+      <!-- Papan clipboard (hijau) -->
+      <div style="background:#5a7a4a;border:4px solid #4a6a3a;border-radius:20px;padding:16px;padding-top:24px;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
+
+        <!-- Kertas (krem) -->
+        <div style="background:#f5f0e0;border-radius:12px;padding:32px 28px 40px;position:relative;min-height:480px;overflow:hidden">
+
+          <!-- Garis dekorasi kertas -->
+          <div style="position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#e8e0c8,#f0e8d0,#e8e0c8);border-radius:12px 12px 0 0"></div>
+
+          <!-- Sudut melipat -->
+          <div class="corner-fold"></div>
+
+          <!-- Konten Login -->
+          <div class="flex flex-col items-center gap-5">
+
+            <!-- Judul -->
+            <div class="flex flex-col items-center gap-2 mt-2">
+              <h1 class="text-4xl font-bold" style="color:#3a5a2a">Notes App</h1>
+              <p class="text-xs text-center" style="color:#6a8a5a">Simpan ide dan catatanmu dengan mudah</p>
+            </div>
+
+            <!-- Garis kertas -->
+            <div class="w-full">
+              <div class="note-line"></div>
+              <div class="note-line"></div>
+              <div class="note-line"></div>
+            </div>
+
+            <!-- Feature Cards -->
+            <div class="w-full grid grid-cols-3 gap-3">
+              <div class="rounded-xl p-3 text-center" style="background:rgba(90,122,74,0.12)">
+                <img src="pictures/pen.png" class="w-8 h-8 mx-auto"/>
+                <p class="text-sm mt-1" style="color:#5a7a4a;font-weight:600">Tulis</p>
+              </div>
+              <div class="rounded-xl p-3 text-center" style="background:rgba(90,122,74,0.12)">
+                <img src="pictures/pin.png" class="w-8 h-8 mx-auto"/>
+                <p class="text-sm mt-1" style="color:#5a7a4a;font-weight:600">Sematkan</p>
+              </div>
+              <div class="rounded-xl p-3 text-center" style="background:rgba(90,122,74,0.12)">
+                <img src="pictures/folder.png" class="w-8 h-8 mx-auto"/>
+                <p class="text-sm mt-1" style="color:#5a7a4a;font-weight:600">Kategori</p>
+              </div>
+            </div>
+
+            <!-- Garis kertas -->
+            <div class="w-full">
+              <div class="note-line"></div>
+              <div class="note-line"></div>
+              <div class="note-line"></div>
+            </div>
+
+            <!-- Login Button -->
+            <button id="btnGoogle"
+              class="w-full flex items-center justify-center gap-3 font-semibold py-3 px-6 rounded-xl transition duration-200"
+              style="background:white;color:#3a5a2a;box-shadow:0 4px 16px rgba(0,0,0,0.15);border:2px solid #c8d8b8"
+              onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.2)'"
+              onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.15)'">
+              <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-5 h-5"/>
+              Masuk dengan Google
+            </button>
+
+            <p id="errorMsg" class="text-red-500 text-xs hidden text-center"></p>
+
+            <!-- Garis kertas bawah -->
+            <div class="w-full">
+              <div class="note-line"></div>
+            </div>
+
+            <p class="text-xs text-center" style="color:#3a5a2a">
+              Dengan masuk, kamu menyetujui syarat & ketentuan kami
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="text-center mt-4 text-xs" style="color:rgba(255,255,255,0.6)">
+      © 2026 Notes App · Semua hak cipta dilindungi undang-undang
+    </p>
+  </div>
+
+  <script type="module" src="auth.js"></script>
+</body>
+</html>

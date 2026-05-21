@@ -1,0 +1,352 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* === GREEN PALETTE (dari login) === */
+  --green-deep:    #3a5a2a;
+  --green-dark:    #4a6a3a;
+  --green-mid:     #5a7a4a;
+  --green-light:   #6a8a5a;
+  --green-soft:    #7a9a6a;
+  --green-pale:    #a8c8a8;
+  --green-wash:    #c8dfc8;
+
+  /* === PAPER/CREAM (dari login) === */
+  --paper:         #f5f0e0;
+  --paper-line:    #e0d8c0;
+  --paper-fold:    #d4cba8;
+  --paper-dark:    #ece5cc;
+
+  /* === UI TOKENS === */
+  --bg:            #d4e8d4;
+  --surface:       #f5f0e0;
+  --surface2:      #ece5cc;
+  --border:        #c8d8b8;
+  --text:          #2a3a1a;
+  --text-muted:    #6a8a5a;
+  --text-light:    #8aaa7a;
+
+  --shadow-sm:     0 2px 8px rgba(58,90,42,0.10);
+  --shadow-md:     0 4px 20px rgba(58,90,42,0.15);
+  --shadow-lg:     0 8px 32px rgba(58,90,42,0.20);
+  --radius:        16px;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: linear-gradient(135deg, #c8dfc8 0%, #a8c8a8 50%, #88aa88 100%);
+  background-attachment: fixed;
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ==============================
+   SCROLLBAR
+============================== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--paper-dark); }
+::-webkit-scrollbar-thumb { background: var(--green-pale); border-radius: 3px; }
+
+/* ==============================
+   NAVBAR
+============================== */
+nav {
+  background: var(--paper) !important;
+  border-bottom: 2px solid var(--paper-line) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+/* Search input */
+#searchInput {
+  background: white !important;
+  border: 1.5px solid var(--paper-line) !important;
+  color: var(--text) !important;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+#searchInput::placeholder { color: var(--text-light) !important; }
+#searchInput:focus {
+  border-color: var(--green-mid) !important;
+  box-shadow: 0 0 0 3px rgba(90,122,74,0.15) !important;
+}
+
+/* User chip */
+.user-chip {
+  background: white !important;
+  border: 1.5px solid var(--border) !important;
+}
+
+/* Logout button */
+#btnLogout {
+  color: var(--text-muted) !important;
+  border: 1.5px solid var(--border) !important;
+  background: white;
+  transition: all 0.2s;
+}
+#btnLogout:hover {
+  color: #c0392b !important;
+  border-color: #f5c6c6 !important;
+  background: #fff5f5;
+}
+
+/* ==============================
+   SIDEBAR
+============================== */
+#sidebar {
+  background: var(--paper) !important;
+  border-right: 2px solid var(--paper-line) !important;
+  box-shadow: var(--shadow-md) !important;
+
+  /* paper lines background */
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 27px,
+    var(--paper-line) 27px,
+    var(--paper-line) 28px
+  ) !important;
+  background-attachment: local !important;
+}
+
+/* New Note Button */
+#btnNewNote {
+  background: linear-gradient(135deg, var(--green-mid), var(--green-deep)) !important;
+  border: 2px solid var(--green-dark) !important;
+  box-shadow: var(--shadow-md) !important;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+#btnNewNote:hover {
+  background: linear-gradient(135deg, var(--green-dark), var(--green-deep)) !important;
+  box-shadow: var(--shadow-lg) !important;
+  transform: translateY(-1px);
+}
+
+/* Welcome card */
+.welcome-card {
+  background: white !important;
+  border: 1.5px solid var(--paper-line) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Category buttons */
+.category-btn {
+  color: var(--text-muted) !important;
+  border-radius: 12px;
+  transition: all 0.2s;
+}
+.category-btn:hover {
+  background: rgba(90,122,74,0.12) !important;
+  color: var(--green-dark) !important;
+}
+.active-category {
+  background: linear-gradient(135deg, var(--green-mid), var(--green-dark)) !important;
+  color: white !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(58,90,42,0.25) !important;
+}
+
+/* Stats box */
+.stats-box {
+  background: white !important;
+  border: 1.5px solid var(--paper-line) !important;
+  border-radius: 14px;
+}
+
+/* ==============================
+   MAIN CONTENT
+============================== */
+#mainContent h2 {
+  color: var(--green-deep) !important;
+}
+#mainContent #noteCount {
+  color: var(--text-light) !important;
+}
+
+/* Section labels */
+.section-label {
+  color: var(--text-light) !important;
+  letter-spacing: 0.08em;
+}
+
+/* ==============================
+   NOTE CARDS
+============================== */
+.note-card {
+  background: var(--paper) !important;
+  border: 1.5px solid var(--paper-line) !important;
+  border-radius: 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+
+  /* paper lines */
+  background-image:
+    linear-gradient(var(--paper) 0%, var(--paper) 100%),
+    repeating-linear-gradient(
+      transparent,
+      transparent 23px,
+      var(--paper-line) 23px,
+      var(--paper-line) 24px
+    ) !important;
+}
+
+.note-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, transparent 50%, var(--paper-fold) 50%);
+}
+
+.note-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg) !important;
+  border-color: var(--green-pale) !important;
+}
+
+/* Card accents — ganti warna border-top sesuai palette hijau */
+.note-card[class*="border-t-blue-400"]    { border-top: 4px solid var(--green-soft) !important; }
+.note-card[class*="border-t-purple-400"]  { border-top: 4px solid var(--green-dark) !important; }
+.note-card[class*="border-t-yellow-400"]  { border-top: 4px solid #c9a93a !important; }
+.note-card[class*="border-t-red-400"]     { border-top: 4px solid #b05a4a !important; }
+.note-card[class*="border-t-slate-400"]   { border-top: 4px solid var(--green-pale) !important; }
+
+/* Card title */
+.note-card h3 { color: var(--green-deep) !important; }
+
+/* Card body text */
+.note-card p { color: var(--text-muted) !important; }
+
+/* Card footer border */
+.note-card .border-t { border-color: var(--paper-line) !important; }
+
+/* Category badge */
+.note-card .bg-blue-50   { background: rgba(106,138,90,0.12) !important; }
+.note-card .text-blue-500 { color: var(--green-dark) !important; }
+.note-card .bg-purple-50  { background: rgba(58,90,42,0.10) !important; }
+.note-card .text-purple-500 { color: var(--green-deep) !important; }
+.note-card .bg-yellow-50  { background: rgba(201,169,58,0.12) !important; }
+.note-card .text-yellow-500 { color: #8a6a1a !important; }
+.note-card .bg-red-50     { background: rgba(176,90,74,0.10) !important; }
+.note-card .text-red-500  { color: #8a3a2a !important; }
+.note-card .bg-slate-50   { background: rgba(90,122,74,0.08) !important; }
+.note-card .text-slate-500 { color: var(--text-muted) !important; }
+
+/* Pin & export buttons */
+.btn-pin, .btn-export {
+  background: white !important;
+  border: 1px solid var(--paper-line) !important;
+  color: var(--text-muted) !important;
+  transition: all 0.15s;
+}
+.btn-pin:hover   { background: rgba(90,122,74,0.15) !important; border-color: var(--green-pale) !important; }
+.btn-export:hover { background: rgba(90,122,74,0.15) !important; border-color: var(--green-pale) !important; }
+
+/* ==============================
+   MODAL
+============================== */
+#modal > div {
+  background: var(--paper) !important;
+  border: 2px solid var(--paper-line) !important;
+  box-shadow: var(--shadow-lg) !important;
+
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 27px,
+    var(--paper-line) 27px,
+    var(--paper-line) 28px
+  ) !important;
+}
+
+#modal h3 { color: var(--green-deep) !important; }
+
+#btnCloseModal {
+  background: white !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-muted) !important;
+}
+#btnCloseModal:hover { background: #f5e0e0 !important; color: #a03030 !important; }
+
+/* Form inputs */
+#noteTitle, #noteCategory, #noteContent {
+  background: white !important;
+  border: 1.5px solid var(--paper-line) !important;
+  color: var(--text) !important;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+#noteTitle::placeholder, #noteContent::placeholder {
+  color: var(--text-light) !important;
+}
+#noteTitle:focus, #noteCategory:focus, #noteContent:focus {
+  border-color: var(--green-mid) !important;
+  box-shadow: 0 0 0 3px rgba(90,122,74,0.15) !important;
+  outline: none !important;
+}
+
+/* Pin checkbox label */
+#modal label {
+  background: white !important;
+  border: 1.5px solid var(--paper-line) !important;
+  color: var(--text-muted) !important;
+}
+#notePin { accent-color: var(--green-mid) !important; }
+
+/* Modal footer */
+#modal .border-t { border-color: var(--paper-line) !important; }
+
+/* Save button */
+#btnSaveNote {
+  background: linear-gradient(135deg, var(--green-mid), var(--green-deep)) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+#btnSaveNote:hover {
+  background: linear-gradient(135deg, var(--green-dark), var(--green-deep)) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* Cancel button */
+#btnCancelModal {
+  color: var(--text-muted) !important;
+  background: white !important;
+  border: 1px solid var(--border) !important;
+}
+#btnCancelModal:hover { background: var(--surface2) !important; }
+
+/* Delete button */
+#btnDeleteNote { color: #b05a4a !important; }
+#btnDeleteNote:hover { color: #8a2a1a !important; }
+
+/* ==============================
+   EMPTY STATE
+============================== */
+#emptyState > div:first-child {
+  background: white !important;
+  border: 2px solid var(--paper-line) !important;
+}
+#emptyState p { color: var(--green-dark) !important; }
+#emptyState p:last-of-type { color: var(--text-light) !important; }
+
+#btnNewNote2 {
+  background: linear-gradient(135deg, var(--green-mid), var(--green-deep)) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* ==============================
+   SIDEBAR HIDE/SHOW
+============================== */
+.sidebar-hidden { transform: translateX(-100%); }
+.main-expanded  { margin-left: 0 !important; }
+
+/* ==============================
+   FLOATING NOTES BACKGROUND (dashboard)
+============================== */
+.dash-bg-note {
+  position: fixed;
+  pointer-events: none;
+  opacity: 0.18;
+  z-index: 0;
+}
